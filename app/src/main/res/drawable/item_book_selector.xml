@@ -25,13 +25,13 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="4dp" />
-                    <solid android:width="0.3dp" android:color="@android:color/transparent" />
+                    <solid android:width="0.6dp" android:color="@android:color/transparent" />
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="4dp" />
-                    <stroke android:width="0.3dp" android:color="@android:color/darker_gray" />
+                    <stroke android:width="0.6dp" android:color="@android:color/darker_gray" />
                 </shape>
             </item>
         </layer-list>

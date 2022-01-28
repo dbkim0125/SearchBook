@@ -117,7 +117,7 @@ class SearchResultListFragment: Fragment() {
                         .subscribe(
                                 { result ->
                                     Log.d("BookAPI", result.toString())
-                                    searchResultViewModel.setSearchResultModel(result)
+                                    searchResultViewModel.setSearchResult(result)
 
                                     if(result.books.isNotEmpty()) {
                                         searchResultAdapter.addBooks(result.books)
@@ -151,7 +151,7 @@ class SearchResultListFragment: Fragment() {
                     .subscribe(
                         { result ->
                             Log.d("SearchAPI", result.toString())
-                            searchResultViewModel.setSearchResultModel(result)
+                            searchResultViewModel.setSearchResult(result)
                             searchResultAdapter.removeLoading()
                             searchResultAdapter.addBooks(result.books)
                             isLoading = false

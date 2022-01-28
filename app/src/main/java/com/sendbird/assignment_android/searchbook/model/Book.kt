@@ -4,6 +4,9 @@ import androidx.databinding.BaseObservable
 import com.google.gson.annotations.SerializedName
 
 data class Book(
+    @SerializedName("error")
+    var error: String,
+
     @SerializedName("title")
     var title: String,
 

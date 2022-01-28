@@ -2,7 +2,7 @@ package com.sendbird.assignment_android.searchbook.model
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResultModel (
+data class SearchResult (
     @SerializedName("error")
     var error: Int,
 

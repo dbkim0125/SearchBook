@@ -1,6 +1,7 @@
 package com.sendbird.assignment_android.searchbook.network
 
-import com.sendbird.assignment_android.searchbook.model.SearchResultModel
+import com.sendbird.assignment_android.searchbook.model.Book
+import com.sendbird.assignment_android.searchbook.model.SearchResult
 import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -46,5 +47,10 @@ interface BookAPI {
     fun searchBook(
         @Path("query") query: String,
         @Path("page") page: Int = 1
-    ): Single<SearchResultModel>
+    ): Single<SearchResult>
+
+    @GET("books/{isbn13}")
+    fun getBook(
+        @Path("isbn13") isbn13: String
+    ): Single<Book>
 }

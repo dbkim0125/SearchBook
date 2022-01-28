@@ -53,7 +53,7 @@ class SearchActivity: AppCompatActivity() {
                 val itemTotalCount = recyclerView.adapter!!.itemCount-1
 
                 if(!isLoading && !binding.searchResultList.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
-                    searchResultAdapter.removeLoading()
+                    binding.searchResultList.post { searchResultAdapter.removeLoading() }
                     searchBook(binding.searchEdit.text.toString())
                 }
             }
@@ -72,7 +72,7 @@ class SearchActivity: AppCompatActivity() {
         }
     }
 
-    fun searchBook(keyword: String) {
+    private fun searchBook(keyword: String) {
         isLoading = true
         compositeDisposable.add(
             searchResultViewModel.searchBook(keyword, currentPage)
@@ -80,7 +80,7 @@ class SearchActivity: AppCompatActivity() {
                 .subscribe(
                     { result ->
                         Log.d("BookAPI", "total = ${result.total}, page = ${result.page}, books = ${result.books.size}, currentPage = $currentPage")
-                        searchResultViewModel.setSearchResultModel(result)
+                        searchResultViewModel.setSearchResult(result)
 
                         if(result.books.isNotEmpty()) {
                             searchResultAdapter.addBooks(result.books)

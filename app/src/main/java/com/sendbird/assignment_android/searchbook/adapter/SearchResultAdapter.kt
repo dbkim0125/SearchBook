@@ -1,5 +1,6 @@
 package com.sendbird.assignment_android.searchbook.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sendbird.assignment_android.searchbook.R
+import com.sendbird.assignment_android.searchbook.SearchBookApplication
 import com.sendbird.assignment_android.searchbook.databinding.ItemSearchLoadingBinding
 import com.sendbird.assignment_android.searchbook.databinding.ItemSearchResultBinding
 import com.sendbird.assignment_android.searchbook.model.Book
@@ -37,14 +39,18 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResult
     }
 
     fun addBooks(books: List<Book?>) {
+        val oldSize = bookList.size
         bookList.addAll(books)
         bookList.add(null)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(oldSize, books.size + 1)
     }
 
     fun removeLoading() {
-        this.bookList.removeAt(bookList.size - 1)
-        notifyItemRemoved(bookList.size)
+        val position = bookList.size - 1
+        if(bookList.isNotEmpty() && bookList[position] == null) {
+            this.bookList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
