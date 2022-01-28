@@ -76,6 +76,7 @@ class SearchActivity: AppCompatActivity() {
         isLoading = true
         compositeDisposable.add(
             searchResultViewModel.searchBook(keyword, currentPage)
+                .doFinally { isLoading = false }
                 .subscribe(
                     { result ->
                         Log.d("BookAPI", "total = ${result.total}, page = ${result.page}, books = ${result.books.size}, currentPage = $currentPage")
@@ -88,11 +89,8 @@ class SearchActivity: AppCompatActivity() {
                         else {
                             searchResultAdapter.removeLoading()
                         }
-
-                        isLoading = false
                     },
                     { error ->
-                        isLoading = false
                         Log.e("BookAPI", error.message ?: "")
                         Toast.makeText(
                             this,
@@ -100,7 +98,8 @@ class SearchActivity: AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     }
-                ))
+                )
+        )
     }
 
     //toggle show of soft keyboard
