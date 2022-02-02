@@ -13,7 +13,7 @@ open class BaseActivity: AppCompatActivity() {
         Log.e("BookAPI", it ?: "")
         Toast.makeText(
             this,
-            "An error has occurred. Please try again later.",
+            "$it Please try again later.",
             Toast.LENGTH_LONG
         ).show()
     }

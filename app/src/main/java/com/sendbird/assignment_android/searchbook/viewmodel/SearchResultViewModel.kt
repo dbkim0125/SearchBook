@@ -1,5 +1,6 @@
 package com.sendbird.assignment_android.searchbook.viewmodel
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.sendbird.assignment_android.searchbook.model.SearchResult
 import com.sendbird.assignment_android.searchbook.repository.BookRepository
@@ -38,6 +39,11 @@ class SearchResultViewModel(private val bookRepository: BookRepository) : BaseVi
     }
 
     fun onSearchButtonClick(query: String) {
+        if(query.split("[-|]".toRegex()).size > 2) {
+            onError("Please input only 1 or 2 keyword.")
+            return
+        }
+
         currentPage.value = 1
         searchBook(query)
     }
