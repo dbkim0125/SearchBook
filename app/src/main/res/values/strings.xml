@@ -3,4 +3,18 @@
 
     <string name="search_edit_hint">Search</string>
     <string name="warning_exit">Press back again to exit.</string>
+
+    <string name="book_label_title">Title</string>
+    <string name="book_label_subtitle">Subtitle</string>
+    <string name="book_label_authors">Authors</string>
+    <string name="book_label_publisher">Publisher</string>
+    <string name="book_label_language">Language</string>
+    <string name="book_label_isbn10">ISBN-10</string>
+    <string name="book_label_isbn13">ISBN-13</string>
+    <string name="book_label_pages">Pages</string>
+    <string name="book_label_published">Published</string>
+    <string name="book_label_rating">Rating</string>
+    <string name="book_label_desc">Description</string>
+    <string name="book_label_price">Price</string>
+    <string name="book_label_url">Buy</string>
 </resources>

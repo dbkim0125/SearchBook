@@ -47,5 +47,5 @@ data class Book(
     var image: String,
 
     @SerializedName("url")
-    var status: String
+    var url: String
 ): BaseObservable()

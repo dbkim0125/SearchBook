@@ -1,6 +1,6 @@
 package com.sendbird.assignment_android.searchbook.adapter
 
-import android.content.Intent
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,19 +8,29 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sendbird.assignment_android.searchbook.R
-import com.sendbird.assignment_android.searchbook.SearchBookApplication
 import com.sendbird.assignment_android.searchbook.databinding.ItemSearchLoadingBinding
 import com.sendbird.assignment_android.searchbook.databinding.ItemSearchResultBinding
 import com.sendbird.assignment_android.searchbook.model.Book
 
-class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResultItemViewHolder>() {
+class SearchResultAdapter(private val context: Context, private val onBookClickListener: OnBookClickListener): RecyclerView.Adapter<SearchResultAdapter.SearchResultItemViewHolder>() {
     private val VIEW_TYPE_BOOK = 0
     private val VIEW_TYPE_LOADING = 1
+
+    interface OnBookClickListener {
+        fun onSelectBook(book: Book)
+        fun onBuyBook(book: Book)
+    }
 
     inner class SearchResultItemViewHolder(viewDataBinding: ViewDataBinding): RecyclerView.ViewHolder(
         viewDataBinding.root
     ) {
         val binding: ViewDataBinding = viewDataBinding
+
+        init {
+            if(binding is ItemSearchResultBinding) {
+                binding.clickListener = onBookClickListener
+            }
+        }
     }
 
     private var bookList = mutableListOf<Book?>()
@@ -45,7 +55,7 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResult
         notifyItemRangeChanged(oldSize, books.size + 1)
     }
 
-    fun removeLoading() {
+    fun removeLoadingIfExist() {
         val position = bookList.size - 1
         if(bookList.isNotEmpty() && bookList[position] == null) {
             this.bookList.removeAt(position)
@@ -82,11 +92,6 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResult
                 (holder.binding as ItemSearchResultBinding).book = book
 
                 Glide.with(holder.itemView).load(book?.image).into(holder.binding.bookCover)
-
-                holder.binding.root.setOnClickListener { v ->
-                    if (book != null) {
-                    }
-                }
             }
 
             else -> {

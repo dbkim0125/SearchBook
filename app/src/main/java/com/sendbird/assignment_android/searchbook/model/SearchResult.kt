@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchResult (
     @SerializedName("error")
-    var error: Int,
+    var error: String,
 
     @SerializedName("total")
     var total: Int,
